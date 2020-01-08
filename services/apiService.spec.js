@@ -11,6 +11,13 @@ describe("ApiService", () => {
         createDate: "2019-12-20T14:01:50.938Z"
       };
 
+      const mockJsonResponse = Promise.resolve(mockSuccessResponse);
+      const mockFetchResponse = Promise.resolve({
+        json: () => mockJsonResponse
+      });
+
+      jest.spyOn(global, "fetch").mockImplementation(() => mockFetchResponse);
+
       return ApiService.get("user/me").then(response => {
         expect(response).toMatchObject(mockSuccessResponse);
       });
@@ -27,6 +34,16 @@ describe("ApiService", () => {
     });
 
     it("should not update points if amount is not valid", () => {
+      const body = {
+        amount: 2000
+      };
+
+      return ApiService.post("user/points", body).then(response => {
+        expect(response.error).toEqual("Enter a Valid Amount.");
+      });
+    });
+
+    it("should return products array", () => {
       const body = {
         amount: 2000
       };
