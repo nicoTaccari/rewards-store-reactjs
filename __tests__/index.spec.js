@@ -2,20 +2,45 @@ import { shallow } from "enzyme";
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Home from "../pages/index.js";
+import Index from "../pages/index.js";
 
-describe("With Enzyme", () => {
+const setup = overrideProps => {
+  const props = {
+    products: [
+      {
+        _id: "5a0b35c1734d1d08bf7084c3",
+        name: "iPhone 8",
+        cost: 800,
+        category: "Phones",
+        img: {
+          url: "https://aerolab-challenge.now.sh/images/iPhone8-x1.png",
+          hdUrl: "https://aerolab-challenge.now.sh/images/iPhone8-x2.png"
+        }
+      }
+    ],
+    ...overrideProps
+  };
+
+  const wrapper = shallow(<Index {...props} />);
+
+  return {
+    props,
+    wrapper,
+    instance: wrapper.instance()
+  };
+};
+
+describe("With Enzyme and match snapshot", () => {
   it('App shows "Hello world"', () => {
-    const app = shallow(<Home />);
+    const { wrapper } = setup();
 
-    expect(app.find("div").text()).toEqual("Hello world");
+    expect(wrapper.find("div").text()).toEqual("Hello world");
   });
 });
 
 describe("With Snapshot Testing", () => {
   it('App shows "Hello world"', () => {
-    const component = renderer.create(<Home />);
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
+    const { wrapper } = setup();
+    expect(wrapper).toMatchSnapshot();
   });
 });

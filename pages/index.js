@@ -1,25 +1,27 @@
 import React from "react";
 import Head from "next/head";
-import Nav from "../components/nav";
-import ApiService from "../services/apiService";
+import { getProducts } from "../redux/reducers/productReducer";
+import { ProductCard } from "../components/productCard";
 
-const Home = data => (
+const Home = props => (
   <>
     <Head>
       <title>Home</title>
       <link rel="icon" href="/favicon.ico" />
       <div>Hello world</div>
-      {Array(data).map(user => user.name)}
+      <ul>
+        {props.products.map(product => (
+          <ProductCard key={product._id} product={product} />
+        ))}
+      </ul>
     </Head>
-
-    <Nav />
   </>
 );
 
-Home.getInitialProps = async function() {
-  const data = ApiService.getUserData();
-  console.log(data);
-  return { data };
+Home.getInitialProps = async ({ reduxStore }) => {
+  const products = await reduxStore.dispatch(getProducts());
+
+  return { products };
 };
 
 export default Home;
