@@ -11,10 +11,14 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "isomorphic-unfetch": "^3.0.0",
     "next": "9.1.6",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-    "isomorphic-unfetch": "^3.0.0"
+    "react-redux": "^7.1.3",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
