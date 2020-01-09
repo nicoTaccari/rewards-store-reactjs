@@ -1,10 +1,6 @@
-import ApiService from "../../services/apiService";
-import {
-  setProducts,
-  setError,
-  setFetching
-} from "../../ducks/products/actions/productActions";
-import { actionTypes } from "../../ducks/products/types/productTypes";
+import ApiService from "./../../../services/apiService";
+import { setProducts, setError, setFetching } from "../actions/productActions";
+import { actionTypes } from "../types/productTypes";
 
 const initialState = {
   data: [],

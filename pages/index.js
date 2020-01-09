@@ -1,6 +1,6 @@
 import React from "react";
 import Head from "next/head";
-import { getProducts } from "../redux/reducers/productReducer";
+import { getProducts } from "../ducks/products/reducers/productReducer";
 import { ProductCard } from "../components/productCard";
 
 const Home = props => (
