@@ -3,17 +3,27 @@ import Head from "next/head";
 import { getProducts } from "../ducks/products/reducers/productReducer";
 import { ProductCard } from "../components/productCard";
 
+import {
+  GridContainer,
+  LayoutWrapper,
+  GridRow
+} from "../components/styledGrid";
+
 const Home = props => (
   <>
     <Head>
       <title>Home</title>
       <link rel="icon" href="/favicon.ico" />
       <div>Hello world</div>
-      <ul>
-        {props.products.map(product => (
-          <ProductCard key={product._id} product={product} />
-        ))}
-      </ul>
+      <LayoutWrapper>
+        <GridContainer>
+          <GridRow>
+            {props.products.map(product => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </GridRow>
+        </GridContainer>
+      </LayoutWrapper>
     </Head>
   </>
 );
