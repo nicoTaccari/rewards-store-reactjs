@@ -1,24 +1,21 @@
-import { GridColumn, Card, CardTitle, CardFront } from "./styledGrid";
+import { Card, CardTitle, CardFront } from "../styles/styledGrid";
 import React, { useState } from "react";
 
 export const ProductCard = props => {
   const { product } = props;
 
-  // console.log(product);
-
-  const [flipped, setFlipped] = useState(false);
-
+  console.log(props);
   return (
-    <GridColumn sm="6" lg="4">
-      <Card>
-        <div onClick={() => setFlipped(!flipped)}>
-          <CardFront>
-            <CardTitle>{product.name}</CardTitle>
+    <Card>
+      <CardFront>
+        <CardTitle>
+          <div>{product.name}</div>
+        </CardTitle>
 
-            <img src={product.img.url}></img>
-          </CardFront>
-        </div>
-      </Card>
-    </GridColumn>
+        <img src={product.img.url}></img>
+        <div>{product.cost}</div>
+        <div>{product.category}</div>
+      </CardFront>
+    </Card>
   );
 };

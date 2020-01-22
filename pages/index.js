@@ -1,30 +1,23 @@
 import React from "react";
-import Head from "next/head";
 import { getProducts } from "../ducks/products/reducers/productReducer";
 import { ProductCard } from "../components/productCard";
 
-import {
-  GridContainer,
-  LayoutWrapper,
-  GridRow
-} from "../components/styledGrid";
+import { Container, Content } from "../styles/styledGrid";
+import { DesktopNavbar } from "../components/desktopNavbar";
+import { StyledSidenav } from "../styles/styledSidenav";
 
 const Home = props => (
   <>
-    <Head>
-      <title>Home</title>
-      <link rel="icon" href="/favicon.ico" />
-      <div>Hello world</div>
-      <LayoutWrapper>
-        <GridContainer>
-          <GridRow>
-            {props.products.map(product => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </GridRow>
-        </GridContainer>
-      </LayoutWrapper>
-    </Head>
+    <title>Rewards Store</title>
+    <DesktopNavbar />
+    <Container>
+      <StyledSidenav />
+      <Content>
+        {props.products.map(product => (
+          <ProductCard key={product._id} product={product} />
+        ))}
+      </Content>
+    </Container>
   </>
 );
 
