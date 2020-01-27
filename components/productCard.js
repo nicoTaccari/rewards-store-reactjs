@@ -4,7 +4,7 @@ import React, { useState } from "react";
 export const ProductCard = props => {
   const { product } = props;
 
-  console.log(props);
+  // console.log(props);
   return (
     <Card>
       <CardFront>

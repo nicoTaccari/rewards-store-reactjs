@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { StyledSidenav } from "../styles/styledSidenav";
 // Helper function to convert pixels to rems (remy)
 const remy = px => `${px / 16}rem`;
 
@@ -8,9 +7,8 @@ const Container = styled.div`
   font-weight: bold;
   text-align: center;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  grid-gap: 10px;
+  display: flex;
+  flex-flow: row nowrap;
 `;
 
 const Card = styled.article`
