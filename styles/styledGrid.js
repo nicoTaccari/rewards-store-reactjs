@@ -48,7 +48,7 @@ const CardImage = styled.span`
 `;
 
 const Content = styled.article`
-  padding: 0;
+  padding: 5rem;
   margin: 0;
   list-style: none;
 
@@ -58,10 +58,17 @@ const Content = styled.article`
   justify-content: space-around;
 `;
 
-const Footer = styled.footer`
-  grid-column: 1 / -1;
-  font-size: 2vh;
-  font-family: Georgia, "Times New Roman", Times, serif;
+const CardFooter = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
 `;
 
-export { Footer, Container, Card, CardFront, CardTitle, CardImage, Content };
+export {
+  Container,
+  Card,
+  CardFront,
+  CardTitle,
+  CardImage,
+  Content,
+  CardFooter
+};

@@ -6,7 +6,18 @@ export const useStyles = makeStyles(theme => ({
   root: {
     display: "flex"
   },
+  title: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginRight: theme.spacing(2)
+  },
   appBar: {
+    justifyContent: "space-between",
+    height: 80,
+    backgroundColor: "#FFFF5B",
+    alignitems: "center",
+    color: "#000000",
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
@@ -36,9 +47,10 @@ export const useStyles = makeStyles(theme => ({
   drawerHeader: {
     display: "flex",
     alignItems: "center",
+    height: 80,
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
-    justifyContent: "flex-end"
+    justifyContent: "space-between"
   },
   content: {
     flexGrow: 1,
@@ -47,7 +59,8 @@ export const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
+    backgroundColor: "#ebebeb"
   },
   contentShift: {
     transition: theme.transitions.create("margin", {

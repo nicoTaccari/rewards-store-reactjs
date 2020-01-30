@@ -34,12 +34,12 @@ describe("With Enzyme and match snapshot", () => {
   it('App shows "Hello world"', () => {
     const { wrapper } = setup();
 
-    expect(wrapper.find("div").text()).toEqual("Hello world");
+    expect(wrapper.find("title").text()).toEqual("Rewards Store");
   });
 });
 
 describe("With Snapshot Testing", () => {
-  it('App shows "Hello world"', () => {
+  it("App shows title and renders children", () => {
     const { wrapper } = setup();
     expect(wrapper).toMatchSnapshot();
   });

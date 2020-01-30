@@ -1,9 +1,6 @@
 import React from "react";
-import { getProducts } from "../ducks/products/reducers/productReducer";
-import { ProductCard } from "../components/productCard";
-
-import { Container, Content } from "../styles/styledGrid";
-import { DesktopNavbar } from "../components/desktopNavbar";
+import { getProducts } from "../ducks/reducers/productReducer";
+import { getUser } from "../ducks/reducers/userReducer";
 import { Sidenav } from "../components/sidenav";
 
 const Home = props => (
@@ -15,8 +12,9 @@ const Home = props => (
 
 Home.getInitialProps = async ({ reduxStore }) => {
   const products = await reduxStore.dispatch(getProducts());
+  const user = await reduxStore.dispatch(getUser());
 
-  return { products };
+  return { products, user };
 };
 
 export default Home;

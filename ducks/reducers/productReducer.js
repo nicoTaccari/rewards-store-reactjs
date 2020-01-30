@@ -1,38 +1,38 @@
-import ApiService from "./../../../services/apiService";
-import { setUser, setError, setFetching } from "../actions/userActions";
-import { userActionTypes } from "../types/userTypes";
+import ApiService from "../../services/apiService";
+import { setProducts, setError, setFetching } from "../actions/productActions";
+import { actionTypes } from "../types/productTypes";
 
 const initialState = {
-  data: {},
+  data: [],
   fetching: false,
   requestStatus: null
 };
 
 //actions
 //action creator
-const getUser = () => dispatch => {
+const getProducts = () => dispatch => {
   dispatch(setFetching());
-  return ApiService.get("user/me")
+  return ApiService.get("products")
     .then(response => {
-      dispatch(setUser(response));
+      dispatch(setProducts(response));
       return response;
     })
     .catch(err => dispatch(setError(err)));
 };
 //reducer
-const userReducer = (state = initialState, action) => {
+const productReducer = (state = initialState, action) => {
   switch (action.type) {
-    case userActionTypes.USER_FETCHING:
+    case actionTypes.PRODUCTS_FETCHING:
       return Object.assign({}, state, {
         fetching: true
       });
-    case userActionTypes.USER_FETCH_SUCCESS:
+    case actionTypes.PRODUCTS_FETCH_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         fetching: false,
         requestStatus: "success"
       });
-    case userActionTypes.USER_FETCH_FAILURE:
+    case actionTypes.PRODUCTS_FETCH_FAILURE:
       return Object.assign({}, state, {
         fetching: false,
         requestStatus: "error"
@@ -42,4 +42,4 @@ const userReducer = (state = initialState, action) => {
   }
 };
 
-export { getUser, userReducer };
+export { getProducts, productReducer };

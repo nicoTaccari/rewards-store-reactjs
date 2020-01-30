@@ -29,6 +29,7 @@
     "babel-plugin-styled-components": "^1.10.6",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
+    "redux-mock-store": "^1.5.4",
     "file-loader": "^5.0.2",
     "jest": "^24.9.0"
   }

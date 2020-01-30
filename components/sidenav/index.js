@@ -7,24 +7,23 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
-import { ProductCard } from "../components/productCard";
-import { Content } from "../styles/styledGrid";
+import { ProductCard } from "../productCard";
+import { Content } from "../../styles/styledGrid";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import { useStyles } from "../styles/drawer";
+import { useStyles } from "../../styles/drawer";
+import { UserInfo } from "../userInfo";
 
 export const Sidenav = props => {
+  const { user } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  console.log(props);
 
   return (
     <div className={classes.root}>
@@ -37,6 +36,7 @@ export const Sidenav = props => {
       >
         <Toolbar>
           <IconButton
+            className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
             onClick={() => setOpen(true)}
@@ -45,9 +45,11 @@ export const Sidenav = props => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" className={classes.title}>
             Rewards Store
           </Typography>
+
+          <UserInfo user={user} />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -60,6 +62,9 @@ export const Sidenav = props => {
         }}
       >
         <div className={classes.drawerHeader}>
+          <Typography variant="h6" noWrap>
+            Historial de Compras
+          </Typography>
           <IconButton onClick={() => setOpen(false)}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
@@ -70,25 +75,17 @@ export const Sidenav = props => {
         </div>
         <Divider />
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          {user.redeemHistory.length > 0 ? (
+            user.redeemHistory.map(product => (
+              <ProductCard
+                key={product._id}
+                product={product}
+                isRedeem={true}
+              />
+            ))
+          ) : (
+            <p>No se ha Comprado ningun producto aun</p>
+          )}
         </List>
       </Drawer>
       <main
