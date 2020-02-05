@@ -16,14 +16,16 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { useStyles } from "../../styles/drawer";
 import { UserInfo } from "../userInfo";
+import { useSelector } from "react-redux";
 
-export const Sidenav = props => {
-  const { user } = props;
+export const Sidenav = () => {
+  const user = useSelector(state => state.user);
+
+  const productsList = useSelector(state => state.products);
+
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
-  console.log(props);
 
   return (
     <div className={classes.root}>
@@ -75,13 +77,9 @@ export const Sidenav = props => {
         </div>
         <Divider />
         <List>
-          {user.redeemHistory.length > 0 ? (
-            user.redeemHistory.map(product => (
-              <ProductCard
-                key={product._id}
-                product={product}
-                isRedeem={true}
-              />
+          {user.history ? (
+            user.history.map((product, i) => (
+              <ProductCard product={product} key={i} isRedeem={true} />
             ))
           ) : (
             <p>No se ha Comprado ningun producto aun</p>
@@ -94,9 +92,13 @@ export const Sidenav = props => {
         })}
       >
         <Content>
-          {props.products.map(product => (
-            <ProductCard key={product._id} product={product} />
-          ))}
+          {productsList ? (
+            productsList.data.map(product => (
+              <ProductCard key={product._id} product={product} />
+            ))
+          ) : (
+            <div>Loading...</div>
+          )}
         </Content>
       </main>
     </div>

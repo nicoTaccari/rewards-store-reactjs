@@ -12,4 +12,32 @@ const setError = error => ({
 
 const setFetching = () => ({ type: userActionTypes.USER_FETCHING });
 
-export { setError, setFetching, setUser };
+const setCredits = message => ({
+  type: userActionTypes.USER_ADD_CREDITS_SUCCESS,
+  payload: message
+});
+
+const setCreditsError = error => ({
+  type: userActionTypes.USER_ADD_CREDITS_FAILURE,
+  payload: error
+});
+
+const getHistory = history => ({
+  type: userActionTypes.USER_GET_HISTORY_SUCCESS,
+  payload: history
+});
+
+const getHistoryError = () => ({
+  type: userActionTypes.USER_GET_HISTORY_ERROR,
+  payload: []
+});
+
+export {
+  setError,
+  setCredits,
+  setCreditsError,
+  setFetching,
+  setUser,
+  getHistory,
+  getHistoryError
+};

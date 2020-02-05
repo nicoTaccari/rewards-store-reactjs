@@ -6,7 +6,7 @@ import {
 } from "../../styles/styledGrid";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { redeemProduct } from "../../ducks/reducers/redeemReducer";
+import { redeemProduct } from "../../ducks/reducers/productReducer";
 import { Button, Typography } from "@material-ui/core";
 
 export const ProductCard = props => {

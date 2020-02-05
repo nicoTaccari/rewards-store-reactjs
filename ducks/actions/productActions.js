@@ -12,4 +12,23 @@ const setError = error => ({
 
 const setFetching = () => ({ type: actionTypes.PRODUCTS_FETCHING });
 
-export { setError, setFetching, setProducts };
+const setRedeem = message => ({
+  type: actionTypes.PRODUCT_REDEEM_SUCCESS,
+  payload: message
+});
+
+const setRedeemError = error => ({
+  type: actionTypes.PRODUCT_REDEEM_FAILURE,
+  payload: error
+});
+
+const setPosting = () => ({ type: actionTypes.PRODUCT_POSTING });
+
+export {
+  setError,
+  setFetching,
+  setProducts,
+  setRedeemError,
+  setPosting,
+  setRedeem
+};

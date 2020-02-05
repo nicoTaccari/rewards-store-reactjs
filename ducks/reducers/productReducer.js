@@ -1,6 +1,14 @@
 import ApiService from "../../services/apiService";
-import { setProducts, setError, setFetching } from "../actions/productActions";
+import {
+  setProducts,
+  setError,
+  setFetching,
+  setRedeemError,
+  setRedeem
+} from "../actions/productActions";
 import { actionTypes } from "../types/productTypes";
+import { getUser } from "./userReducer";
+import { getHistory } from "../actions/userActions";
 
 const initialState = {
   data: [],
@@ -18,6 +26,29 @@ const getProducts = () => dispatch => {
       return response;
     })
     .catch(err => dispatch(setError(err)));
+};
+
+const getBody = productId => {
+  let body = {
+    productId: productId
+  };
+
+  console.log(body);
+  return body;
+};
+
+//actions
+//action creator
+const redeemProduct = productId => dispatch => {
+  dispatch(setFetching());
+  return ApiService.post("redeem", getBody(productId))
+    .then(response => {
+      dispatch(getUser());
+      dispatch(getHistory());
+      // dispatch(setRedeem(response));
+      return response;
+    })
+    .catch(err => dispatch(setRedeemError(err)));
 };
 //reducer
 const productReducer = (state = initialState, action) => {
@@ -37,9 +68,14 @@ const productReducer = (state = initialState, action) => {
         fetching: false,
         requestStatus: "error"
       });
+    case actionTypes.PRODUCT_REDEEM_FAILURE:
+      return Object.assign({}, state, {
+        fetching: false,
+        requestStatus: "error"
+      });
     default:
       return { ...state };
   }
 };
 
-export { getProducts, productReducer };
+export { getProducts, productReducer, initialState, redeemProduct };

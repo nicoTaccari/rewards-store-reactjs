@@ -1,20 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { getProducts } from "../ducks/reducers/productReducer";
 import { getUser } from "../ducks/reducers/userReducer";
 import { Sidenav } from "../components/sidenav";
+import { useDispatch } from "react-redux";
 
-const Home = props => (
-  <>
-    <title>Rewards Store</title>
-    <Sidenav {...props} />
-  </>
-);
+const Home = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getProducts());
+    dispatch(getUser());
+  }, []);
 
-Home.getInitialProps = async ({ reduxStore }) => {
-  const products = await reduxStore.dispatch(getProducts());
-  const user = await reduxStore.dispatch(getUser());
-
-  return { products, user };
+  return (
+    <>
+      <title>Rewards Store</title>
+      <Sidenav />
+    </>
+  );
 };
 
 export default Home;

@@ -14,7 +14,6 @@ export const useStyles = makeStyles(theme => ({
   },
   appBar: {
     justifyContent: "space-between",
-    height: 80,
     backgroundColor: "#FFFF5B",
     alignitems: "center",
     color: "#000000",
@@ -47,7 +46,6 @@ export const useStyles = makeStyles(theme => ({
   drawerHeader: {
     display: "flex",
     alignItems: "center",
-    height: 80,
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
     justifyContent: "space-between"

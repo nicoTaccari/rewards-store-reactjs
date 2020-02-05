@@ -1,12 +1,12 @@
 import fetch from "isomorphic-unfetch";
 
 const baseUrl = "https://aerolab-challenge.now.sh/";
+// const baseUrl =
+//   "https://private-anon-0c930830a3-aerolabchallenge.apiary-proxy.com/";
 
 const apiHeaders = {
   "Content-Type": "application/json",
   Accept: "application/json",
-  mode: "cors",
-  credentials: "same-origin",
   Authorization:
     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGZjZDQ0ZTgzYTNjMjAwNmRmOTUzM2IiLCJpYXQiOjE1NzY4NTA1MTF9.UvSUoJJCOWU8PvShXlpuHRTnex9mNu7qZ5vMn16mWeY"
 };
