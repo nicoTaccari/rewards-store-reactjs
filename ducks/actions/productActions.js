@@ -24,11 +24,4 @@ const setRedeemError = error => ({
 
 const setPosting = () => ({ type: actionTypes.PRODUCT_POSTING });
 
-export {
-  setError,
-  setFetching,
-  setProducts,
-  setRedeemError,
-  setPosting,
-  setRedeem
-};
+export { setError, setFetching, setProducts, setRedeemError, setPosting };

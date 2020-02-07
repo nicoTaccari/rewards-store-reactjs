@@ -1,0 +1,4 @@
+export const actionTypes = {
+  SET_SEARCH_FILTER: "SET_SEARCH_FILTER",
+  SET_ORDER_FILTER: "SET_ORDER_FILTER"
+};

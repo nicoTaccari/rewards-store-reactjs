@@ -3,12 +3,12 @@ import {
   setProducts,
   setError,
   setFetching,
-  setRedeemError,
-  setRedeem
+  setRedeemError
 } from "../actions/productActions";
 import { actionTypes } from "../types/productTypes";
 import { getUser } from "./userReducer";
 import { getHistory } from "../actions/userActions";
+import { toast } from "react-toastify";
 
 const initialState = {
   data: [],
@@ -37,18 +37,21 @@ const getBody = productId => {
   return body;
 };
 
-//actions
-//action creator
 const redeemProduct = productId => dispatch => {
   dispatch(setFetching());
   return ApiService.post("redeem", getBody(productId))
     .then(response => {
       dispatch(getUser());
       dispatch(getHistory());
-      // dispatch(setRedeem(response));
+      toast.success("compra Exitosa", { position: toast.POSITION.TOP_CENTER });
       return response;
     })
-    .catch(err => dispatch(setRedeemError(err)));
+    .catch(err => {
+      dispatch(setRedeemError(err));
+      toast.warn("No se pudo realizar la compra", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    });
 };
 //reducer
 const productReducer = (state = initialState, action) => {
@@ -72,6 +75,12 @@ const productReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         fetching: false,
         requestStatus: "error"
+      });
+    case actionTypes.PRODUCT_SEARCH_FILTER:
+      return Object.assign({}, state, {
+        data: action.payload,
+        fetching: false,
+        requestStatus: "success"
       });
     default:
       return { ...state };

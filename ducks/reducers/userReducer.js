@@ -9,6 +9,7 @@ import {
   setCreditsError
 } from "../actions/userActions";
 import { userActionTypes } from "../types/userTypes";
+import { toast } from "react-toastify";
 
 const getBody = points => {
   let body = {
@@ -53,9 +54,17 @@ const addCredits = points => dispatch => {
   return ApiService.post("user/points", getBody(points))
     .then(response => {
       dispatch(setCredits(response));
+      toast.success(points + " puntos agregados", {
+        position: toast.POSITION.TOP_CENTER
+      });
       return response;
     })
-    .catch(err => dispatch(setCreditsError(err)));
+    .catch(err => {
+      dispatch(setCreditsError(err));
+      toast.warn(points + Agregados, {
+        position: toast.POSITION.TOP_CENTER
+      });
+    });
 };
 //reducer
 const userReducer = (state = initialState, action) => {

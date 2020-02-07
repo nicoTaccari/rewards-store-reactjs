@@ -11,7 +11,6 @@ import { Button, Typography } from "@material-ui/core";
 
 export const ProductCard = props => {
   const { product, isRedeem } = props;
-  const initialState = useSelector(state => state);
   const dispatch = useDispatch();
 
   // console.log(props);

@@ -17,11 +17,19 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { useStyles } from "../../styles/drawer";
 import { UserInfo } from "../userInfo";
 import { useSelector } from "react-redux";
+import { Loading } from "../../components/loading/index";
+import { Filters } from "../../components/filters/index";
+
+import "react-toastify/dist/ReactToastify.css";
+import { ProductList } from "../productList";
 
 export const Sidenav = () => {
   const user = useSelector(state => state.user);
+  const filters = useSelector(state => state.filters);
 
-  const productsList = useSelector(state => state.products);
+  console.log(filters);
+
+  const products = useSelector(state => state.products);
 
   const classes = useStyles();
   const theme = useTheme();
@@ -50,10 +58,13 @@ export const Sidenav = () => {
           <Typography variant="h6" className={classes.title}>
             Rewards Store
           </Typography>
-
+          <Filters />
+          {/* <div className={classes.grow} /> */}
+          {/* <div className={classes.} */}
           <UserInfo user={user} />
         </Toolbar>
       </AppBar>
+
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -82,7 +93,7 @@ export const Sidenav = () => {
               <ProductCard product={product} key={i} isRedeem={true} />
             ))
           ) : (
-            <p>No se ha Comprado ningun producto aun</p>
+            <Loading />
           )}
         </List>
       </Drawer>
@@ -92,13 +103,7 @@ export const Sidenav = () => {
         })}
       >
         <Content>
-          {productsList ? (
-            productsList.data.map(product => (
-              <ProductCard key={product._id} product={product} />
-            ))
-          ) : (
-            <div>Loading...</div>
-          )}
+          <ProductList filters={filters} products={products} />
         </Content>
       </main>
     </div>
